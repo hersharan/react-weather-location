@@ -4,7 +4,8 @@ var PropTypes = require('prop-types');
 class Location extends React.Component {
 	render() {
         return ( < div className="locArea"> 
-        	Location div
+        	Location 
+        	{this.props.location}
         < /div>)
     }
 }
