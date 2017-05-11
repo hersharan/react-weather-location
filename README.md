@@ -7,16 +7,17 @@
     for the week.
     On the right you have to call Google Maps API to show the location on the map and pin it."
  
-Install : 
+#Install : 
 
 npm install
 
-Run : 
-
-to build  :  
+#Run to build  :  
 
 npm run build
 
-to use as dev with server : 
+#To use as dev with server : 
 
 npm run dev-run
+
+#node version : v6.x
+#npm version : 3.10
