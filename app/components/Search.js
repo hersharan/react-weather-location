@@ -13,9 +13,9 @@ class Search extends React.Component {
     constructor(props){
         super(props);
         this.state ={
-            location :'London',
+            location :'Delhi',
             data : {
-            	"coord":{"lon":-0.13,"lat":51.51},
+            	"coord":{"lat":28.6139,"lon":77.2090},
             },
         };
         this.handleChange = this.handleChange.bind(this);
@@ -69,7 +69,7 @@ class Search extends React.Component {
             </form>
           </div>
         </div>
-        <div className="flex-center">
+        <div className="flex">
             <Temperature location={this.state.location} locData={this.state.data}/>
         	<Location location={this.state.location} locData={this.state.data}/>
         </div>
