@@ -5,57 +5,36 @@ var Location = require('./Location');
 
 class Search extends React.Component {
 	  /// Capitalize the first letter of a string
-  // capitalizeFirstLetter: function(string) {
-  //   return string.charAt(0).toUpperCase() + string.slice(1);
-  // },
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
   
   /// Set an initial state
     constructor(props){
         super(props);
         this.state ={
-            location :'Bristol'
+            location :'London',
+            data : {
+            	"coord":{"lon":-0.13,"lat":51.51},
+            },
         };
         this.handleChange = this.handleChange.bind(this);
         this.formSubmit = this.formSubmit.bind(this);
         this.getData = this.getData.bind(this);
     }
-   /// Use jQuery Ajax to get some data
-  // loadData: function (location) {
-  //   return $.get('http://api.openweathermap.org/data/2.5/weather?q=' + location);
-  // },
-  
-  /// Set the state after loading data from the API
-  // setStateWithData: function (location) {
-  //   this.loadData(location).then( function (data) {      
-  //     this.setState({
-  //        weather: this.capitalizeFirstLetter( data.weather[0].description ),
-  //        location: data.name
-  //     });
-  //   }.bind(this));
-  // },
-  
-  /// After initial render
-  // componentDidMount: function () {
-  //   /// Pass in the initial state to get the initial weather
-  //   this.setStateWithData(this.state.location);
-  // },
   
   /// Run when we need to get data after input has changed
   getData() {
-    var location = this.refs.newLocation.value;
+    var location = this.state.location;
     if (location !== '')
     {
-    	    var self = this;
-    fetch('http://samples.openweathermap.org/data/2.5/weather?q=' + location +'&appid=b1b15e88fa797225412429c1c50c122a1').then(function(response) {
-        // return response.json()
-      console.log(response.json())
+   	var self = this;
+    fetch('http://api.openweathermap.org/data/2.5/weather?q=' + location +'&units=metric&appid=31fa0dd5e7db28d97fa13ee9200be5f8').then(function(response) {
+        return response.json()
+      // console.log(response.json())
+      }).then(function(data) {
+        self.setState({ data }, () => console.log('self state',self.state));
       });
-    // .then(function(data) {
-    //     self.setState({ data }, () => console.log(self.state));
-    //   });
-
-    //   this.setStateWithData(location);
-    // console.log('in getData',location);
     }
   }
   handleChange(e){
@@ -68,6 +47,13 @@ class Search extends React.Component {
     e.preventDefault();
     /// Clear the input
     this.refs.newLocation.value = '';
+  }
+    /**
+   * After initial render
+   */
+  componentWillMount () {
+   this.getData();  
+  
   }
 	render() {
         return ( < div className="searchArea"> 
@@ -84,8 +70,8 @@ class Search extends React.Component {
           </div>
         </div>
         <div className="flex-center">
-            <Temperature location={this.state.location}/>
-        	<Location location={this.state.location}/>
+            <Temperature location={this.state.location} locData={this.state.data}/>
+        	<Location location={this.state.location} locData={this.state.data}/>
         </div>
         < /div>)
     }
