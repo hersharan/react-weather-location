@@ -5,10 +5,8 @@ var Search = require('./Search');
 class App extends React.Component {
 	render() {
         return ( < div className="appComponent"> 
-        	<div className="flex-center">
-        	<Search/>
-        	</div>
-        < /div>)
+        	        	<Search/>
+               < /div>)
     }
 }
 

@@ -16,8 +16,19 @@ body{
 .flex{
 	display: flex;
 }
+
  #map {
    width: 100%;
    height: 400px;
    background-color: grey;
  }
+.padding10{
+	padding:10px;
+}
+.tempArea{
+	text-align: center;
+	background-color: white;
+	color:black;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}

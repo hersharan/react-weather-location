@@ -57,13 +57,13 @@ class Search extends React.Component {
   }
 	render() {
         return ( < div className="searchArea"> 
-        	        <div className="panel panel-default text-center">
+        	        <div className="panel panel-default text-center flex-center">
           <div className="panel-body">
             <form className="form-inline" onSubmit={this.formSubmit}>
                 <div className="input-group">
                   <input type="text" value={this.state.location} className="form-control" placeholder="Enter a city name" ref="newLocation" required onChange={ this.handleChange }/>
                   <span className="input-group-btn">
-                    <button type="submit" className="btn btn-success" onClick={this.getData}>Search</button>
+                    <button type="submit" className="btn btn-success" onClick={this.getData}>Search Area</button>
                   </span>
                 </div>
             </form>
