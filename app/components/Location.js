@@ -135,7 +135,6 @@ class Location extends React.Component {
    * Set map marker position and pan settings
    */
   updateMap(lat, lon) {
-    console.log('in update map',lat ,lon);
     var latLng = new google.maps.LatLng(lat,lon);
     
     /// Set a timeout before doing map stuff
@@ -161,7 +160,6 @@ class Location extends React.Component {
     // this.updateState(null, this.state.lat, this.state.lon);
   }
   componentWillReceiveProps(nextProps){
-  	console.log('componentWillReceiveProps',nextProps);
     this.updateMap(nextProps.locData.coord.lat,nextProps.locData.coord.lon);
 }        
   /**
