@@ -69,7 +69,7 @@ class Search extends React.Component {
             </form>
           </div>
         </div>
-        <div className="flex">
+        <div>
             <Temperature location={this.state.location} locData={this.state.data}/>
         	<Location location={this.state.location} locData={this.state.data}/>
         </div>

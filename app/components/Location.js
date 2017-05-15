@@ -33,7 +33,28 @@ class Location extends React.Component {
   this.geolocationSearch = this.geolocationSearch.bind(this);
   this.renderMap = this.renderMap.bind(this);
   this.updateMap = this.updateMap.bind(this);
+  this.updateState = this.updateState.bind(this);
 }
+
+
+  /**
+   * Update state
+   */
+  updateState(locationName, lat, lon) {
+    
+    /// Get data from the API, then set state with it
+    this.getData(locationName, lat, lon)
+      .then(function(data) {
+        /// Update the state, pass updateMap as a callback
+        this.setState({
+          lat:      data.coord.lat,
+          lon:      data.coord.lon,
+          weather:  this.capitalizeFirstLetter( data.weather[0].description ),
+          location: data.name,
+          icon:     'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png' /// Messy
+        }, this.updateMap ) /// Pass updateMap as a callback
+      }.bind(this));
+  }
 
 
 
@@ -106,24 +127,24 @@ class Location extends React.Component {
     marker.setAnimation(google.maps.Animation.DROP);
   
     /// Add an event listener for click
-    google.maps.event.addListener(map, 'click', function(event) {
-      var latLng = event.latLng;
-      var lat = latLng.lat();
-      var lng = latLng.lng();
+    // google.maps.event.addListener(map, 'click', function(event) {
+    //   var latLng = event.latLng;
+    //   var lat = latLng.lat();
+    //   var lng = latLng.lng();
       
-      /// Update state based on lat lon
-      this.updateState(null, lat, lng)
-    }.bind(this));
+    //   /// Update state based on lat lon
+    //   // this.updateState(null, lat, lng)
+    // }.bind(this));
     
-    /// Add an event listener for drag end
-    google.maps.event.addListener(marker, 'dragend', function(event) {
+    // /// Add an event listener for drag end
+    // google.maps.event.addListener(marker, 'dragend', function(event) {
       
-      var latLng = event.latLng;
-      var lat = latLng.lat();
-      var lng = latLng.lng();
-      /// Update state based on lat lon
-      this.updateState(null, lat, lng)
-    }.bind(this));
+    //   var latLng = event.latLng;
+    //   var lat = latLng.lat();
+    //   var lng = latLng.lng();
+    //   /// Update state based on lat lon
+    //   this.updateState(null, lat, lng)
+    // }.bind(this));
     
     /// Update variable on map change
     map.addListener('zoom_changed', function() {
